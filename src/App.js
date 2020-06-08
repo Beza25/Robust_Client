@@ -1,17 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+// import logo from './logo.svg';
+// , Redirect
 import './App.css';
 import  NavBar from './Containers/NavBar'
-import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import HomePage from './Containers/HomePage';
 import LoginForm from './Containers/LoginForm';
 import MainPage from './Containers/MainPage';
 import About from './Containers/About';
+import {connect} from 'react-redux';
+import {fetchingKlasses} from './Redux/actions';
 
 
 
-function App() {
+class App extends Component {
+
+  componentDidMount(){  
+    this.props.fetchingKlasses()
+}
+
+render(){
   return (
+    
     <div className="App">
       <BrowserRouter>
         <NavBar/>
@@ -34,6 +44,19 @@ function App() {
     
     </div>
   );
+
 }
 
-export default App;
+  
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+
+      // props: () => {dispatch({type: "FETCHED_KLASSES"})}
+      // don't forget to invoke it
+      fetchingKlasses: () => { dispatch ( fetchingKlasses())}
+  }
+
+}
+export default connect(null, mapDispatchToProps)(App);

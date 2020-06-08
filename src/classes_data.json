@@ -1,0 +1,65 @@
+[
+    {
+      "id": 1,
+      "name": "Math",
+      "teacher_id": 2,
+      "level": 4,
+      "img": "https://clipartstation.com/wp-content/uploads/2018/10/textbooks-clipart-5.jpg",
+      "created_at": "2020-06-07T00:40:57.980Z",
+      "updated_at": "2020-06-07T00:40:57.980Z"
+    },
+    {
+      "id": 2,
+      "name": "Math",
+      "teacher_id": 2,
+      "level": 5,
+      "img": "https://clipartstation.com/wp-content/uploads/2018/10/textbooks-clipart-5.jpg",
+      "created_at": "2020-06-07T00:40:57.987Z",
+      "updated_at": "2020-06-07T00:40:57.987Z"
+    },
+    {
+      "id": 3,
+      "name": "Math",
+      "teacher_id": 2,
+      "level": 6,
+      "img": "https://clipartstation.com/wp-content/uploads/2018/10/textbooks-clipart-5.jpg",
+      "created_at": "2020-06-07T00:40:57.997Z",
+      "updated_at": "2020-06-07T00:40:57.997Z"
+    },
+    {
+      "id": 4,
+      "name": "Math",
+      "teacher_id": 2,
+      "level": 7,
+      "img": "https://clipartstation.com/wp-content/uploads/2018/10/textbooks-clipart-5.jpg",
+      "created_at": "2020-06-07T00:40:58.003Z",
+      "updated_at": "2020-06-07T00:40:58.003Z"
+    },
+    {
+      "id": 5,
+      "name": "Math",
+      "teacher_id": 1,
+      "level": 4,
+      "img": "https://clipartstation.com/wp-content/uploads/2018/10/textbooks-clipart-5.jpg",
+      "created_at": "2020-06-07T00:40:58.010Z",
+      "updated_at": "2020-06-07T00:40:58.010Z"
+    },
+    {
+      "id": 6,
+      "name": "Math",
+      "teacher_id": 1,
+      "level": 5,
+      "img": "https://clipartstation.com/wp-content/uploads/2018/10/textbooks-clipart-5.jpg",
+      "created_at": "2020-06-07T00:40:58.039Z",
+      "updated_at": "2020-06-07T00:40:58.039Z"
+    },
+    {
+      "id": 7,
+      "name": "Math",
+      "teacher_id": 1,
+      "level": 6,
+      "img": "https://clipartstation.com/wp-content/uploads/2018/10/textbooks-clipart-5.jpg",
+      "created_at": "2020-06-07T00:40:58.047Z",
+      "updated_at": "2020-06-07T00:40:58.047Z"
+    }
+  ]

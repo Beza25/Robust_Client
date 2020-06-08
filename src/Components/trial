@@ -1,0 +1,16 @@
+                    return (
+                        <div className="ui link centered cards">
+                        <div id="chef-card" className="card" >
+                                <div className="image">
+                                    <img alt="recipe" src= "https://clipartstation.com/wp-content/uploads/2018/10/textbooks-clipart-5.jpg"/> 
+                                </div>
+                                <div className="content">
+                                    <div className="header center-name">{k.name}</div>
+                                    <div className="description center-about"> {k.level}</div>
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                     ) }
+)}
