@@ -10,15 +10,16 @@ class Assignments extends Component {
    
   
     render() {
-     
-       console.log(this.props)
-
         return (
             <div>
               
                 <div className="ui relaxed divided list">
                     {this.klassAssigns().map(a =>  
-                        a.klass_id === this.props.klass.id ?  <Assignment key={a.id} assign={a} />: null
+                        a.klass_id === this.props.klass.id ?  
+                        <Assignment key={a.id} assign={a} 
+                            handleEdit={this.props.handleEdit}
+                            handleDelete= {this.props.handleDelete}
+                            />: null
                     ) }
                 
                 </div>

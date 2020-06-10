@@ -10,7 +10,9 @@ import MiddleContainer from "./MiddleContainer"
     constructor(){
         super()
         this.state = {
-            showForm: false
+            showForm: false,
+            editForm: false,
+            editAssign: null
         }
     }
  
@@ -18,15 +20,17 @@ import MiddleContainer from "./MiddleContainer"
         this.setState({showForm: !this.state.showForm})
     }
 
+    handleEdit = (assign) =>{
+        this.setState({editAssign: assign, editForm: true})
+    }
+
     displayAssigns = () =>{
-        this.setState({showForm:false})
+        this.setState({showForm:false, editForm:false})
     }
 
   
 
     render() {
-        // console.log("Main Page: ", this.props)
-       
         return (
             <div className="main-page">
 
@@ -51,6 +55,11 @@ import MiddleContainer from "./MiddleContainer"
                                          createAssign={this.props.createAssign} 
                                         assigns={this.props.assignments}
                                         displayAssigns= {this.displayAssigns}
+                                        handleEdit= {this.handleEdit}
+                                        editForm ={this.state.editForm}
+                                        editAssign = {this.state.editAssign}
+                                        editAssigns = {this.props.editAssigns}
+                                        handleDelete = {this.props.handleDelete}
                                          />
 
                         </div>

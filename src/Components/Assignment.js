@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 class Assignment extends Component {
+  
     render() {
         return (
             <div>
@@ -9,8 +10,8 @@ class Assignment extends Component {
                                 <div className="content">
                                 <a className="header">{this.props.assign.title}  {this.props.assign.deadline}
 
-                                <button className="ui blue button" onClick= {this.handleEdit}> EDIT</button>
-                                <button className="ui red button" onClick= {this.handleDelete}> DELET</button>
+                                <button className="ui blue button" onClick= {() => this.props.handleEdit(this.props.assign)}> EDIT</button>
+                                <button className="ui red button" onClick= {() => this.props.handleDelete(this.props.assign.id)}> DELET</button>
                                 
                                 </a>
                                 {/* <div className="description">Updated 10 mins ago</div> */}

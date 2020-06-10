@@ -77,7 +77,7 @@ getMonthFromString = (mon) => {
 
                     <div className="field">
                         <label>Assignemt</label>
-                        <textarea type="text" name="last-name" placeholder="Last Name"
+                        <textarea type="text"  placeholder="Last Name"
                         onChange= {this.handleChange}
                         value = {this.state.assign}
                         name = "assign"

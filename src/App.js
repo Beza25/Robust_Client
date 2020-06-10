@@ -40,7 +40,7 @@ class App extends Component {
       fetch(`http://localhost:3001/teachers/${currentUser.id}`)
     .then(resp => resp.json())
     .then(data => {
-      console.log("teacher data: ", data)
+      // console.log("teacher data: ", data)
       this.setState({userAssignments: data.assignments})
     })
   
@@ -48,7 +48,7 @@ class App extends Component {
       fetch(`http://localhost:3001/students/${currentUser.id}`)
       .then(resp => resp.json())
       .then(data => {
-        console.log("student data: ", data)
+        // console.log("student data: ", data)
         this.setState({userAssignments: data.assignments})
         
       })
@@ -63,8 +63,31 @@ createAssign =(newAssign) => {
   this.setState({userAssignments: arr }) 
 }
 
+editAssigns = ( updatedAssign) => {
+  let assignments = this.state.userAssignments 
+  // console.log("initial arr", assignments)
+
+  
+  const updatedArr = assignments.forEach(a => { if(a.id === updatedAssign.id){ a = updatedAssign } } )
+   
+    // console.log("updated Arr: ", assignments)
+    this.setState({userAssignments: updatedArr})
+
+}
+
+handleDelete= (id) => {
+  console.log("Attemepting to delete")
+
+  fetch(`http://localhost:3001/assignments/${id}`,{ method: "DELETE" })
+
+  let assignments = this.state.userAssignments
+ const filtered =  assignments.filter(a => a.id !== id)
+  this.setState({userAssignments: filtered})
+  
+}
+
 render(){
-  console.log( "App's state", this.state.userAssignments)
+  console.log( "App's state", this.editAssigns)
   return (
     
     <div className="App">
@@ -85,7 +108,11 @@ render(){
              
               return <MainPage klass = {klass} 
                             createAssign= {this.createAssign}
-                             assignments={this.state.userAssignments}/>
+                             assignments={this.state.userAssignments}
+                             editAssigns = {this.editAssigns}
+                             handleDelete ={this.handleDelete}
+                             
+                             />
 
             }
            }/>
