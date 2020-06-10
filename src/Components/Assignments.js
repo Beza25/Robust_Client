@@ -3,23 +3,26 @@ import Assignment from './Assignment'
 
 class Assignments extends Component {
 
-   klassAssigns (){
-       return this.props.assigns.filter(a => a.klass_id === this.props.klass.id)
 
-   }
    
   
     render() {
+      
+        let {assignments, klass} = this.props
+        const filtered = assignments.filter(a => a.klass_id === klass.id)
+   
+     
         return (
             <div>
-              
+              Assignemts
                 <div className="ui relaxed divided list">
-                    {this.klassAssigns().map(a =>  
-                        a.klass_id === this.props.klass.id ?  
+                    {    filtered.map(a =>  
+                       
                         <Assignment key={a.id} assign={a} 
                             handleEdit={this.props.handleEdit}
                             handleDelete= {this.props.handleDelete}
-                            />: null
+                            />
+                         
                     ) }
                 
                 </div>

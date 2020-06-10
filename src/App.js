@@ -59,35 +59,31 @@ createAssign =(newAssign) => {
   console.log("New Assing: ", newAssign)
  
   let  arr=  [...this.state.userAssignments, newAssign]
-  console.log("UptodateArr: ", arr )
+ 
   this.setState({userAssignments: arr }) 
 }
 
 editAssigns = ( updatedAssign) => {
   let assignments = this.state.userAssignments 
-  // console.log("initial arr", assignments)
-
-  
-  const updatedArr = assignments.forEach(a => { if(a.id === updatedAssign.id){ a = updatedAssign } } )
-   
-    // console.log("updated Arr: ", assignments)
-    this.setState({userAssignments: updatedArr})
-
+ assignments.forEach(a => { if (a.id === updatedAssign.id){
+                                a.title = updatedAssign.title
+                                a.klass_id = updatedAssign.klass_id
+                                a.content = updatedAssign.content
+                                a.deadline = updatedAssign.deadline
+                                a.updated_at = updatedAssign.updated_at
+                          }
+                          })
+    this.setState({userAssignments: assignments })
 }
 
 handleDelete= (id) => {
-  console.log("Attemepting to delete")
-
   fetch(`http://localhost:3001/assignments/${id}`,{ method: "DELETE" })
-
-  let assignments = this.state.userAssignments
- const filtered =  assignments.filter(a => a.id !== id)
+ const filtered =  this.state.userAssignments.filter(a => a.id !== id)
   this.setState({userAssignments: filtered})
   
 }
 
 render(){
-  console.log( "App's state", this.editAssigns)
   return (
     
     <div className="App">

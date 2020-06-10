@@ -12,7 +12,7 @@ export default class MiddleContainer extends Component {
             <div>
                 {this.props.showForm=== false && this.props.editForm === false ?
                  <Assignments klass ={this.props.klass }
-                             assigns ={this.props.assigns} 
+                            assignments ={this.props.assignments} 
                              handleEdit = {this.props.handleEdit}
                              handleDelete = {this.props.handleDelete}
                              

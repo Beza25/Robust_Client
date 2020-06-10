@@ -53,7 +53,7 @@ import MiddleContainer from "./MiddleContainer"
                         <MiddleContainer showForm= {this.state.showForm}
                                          klass={this.props.klass}
                                          createAssign={this.props.createAssign} 
-                                        assigns={this.props.assignments}
+                                         assignments={this.props.assignments}
                                         displayAssigns= {this.displayAssigns}
                                         handleEdit= {this.handleEdit}
                                         editForm ={this.state.editForm}

@@ -42,7 +42,7 @@ editAssign = (e)=> {
         body: JSON.stringify(updateAssign)
     }).then(resp => resp.json())
     .then(updatedAssign =>{
-        console.log(updatedAssign)
+        // console.log(updatedAssign)
         this.props.editAssigns(updatedAssign)
         alert("Successfuly Updaed!")
         this.props.displayAssigns()
