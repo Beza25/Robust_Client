@@ -5,10 +5,28 @@ import MiddleContainer from "./MiddleContainer"
 
 
 
-export default class MainPage extends Component {
+ class MainPage extends Component {
 
+    constructor(){
+        super()
+        this.state = {
+            showForm: false
+        }
+    }
+ 
+    handleClick = () => {
+        this.setState({showForm: !this.state.showForm})
+    }
+
+    displayAssigns = () =>{
+        this.setState({showForm:false})
+    }
+
+  
 
     render() {
+        // console.log("Main Page: ", this.props)
+       
         return (
             <div className="main-page">
 
@@ -21,9 +39,23 @@ export default class MainPage extends Component {
                         
                         </div>
                     
-                        <div className="twelve wide olive column">
-                            <h1>MiddleContainer</h1>
-                                <MiddleContainer/>
+                        <div className="twelve wide white column">
+                        <h1>MiddleContainer</h1>
+
+                        
+                        <button className="ui green button" onClick= {this.handleClick}>Create Assignment</button>
+                        <br/>
+                        <div className= "assignments">
+                        <MiddleContainer showForm= {this.state.showForm}
+                                         klass={this.props.klass}
+                                         createAssign={this.props.createAssign} 
+                                        assigns={this.props.assignments}
+                                        displayAssigns= {this.displayAssigns}
+                                         />
+
+                        </div>
+                        
+                              
                              
 
                                             
@@ -36,4 +68,11 @@ export default class MainPage extends Component {
         )
     }
 }
+
+
+
+
+export default MainPage
+
+
 

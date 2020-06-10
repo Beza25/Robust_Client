@@ -10,6 +10,8 @@ function fetchedKlasses(klasses){
 }
 
 
+
+
 // After fetching dispach the fetched klasses
 // incooperate thunk by returning a dispatch function
 function fetchingKlasses(){
@@ -18,15 +20,16 @@ function fetchingKlasses(){
         .then(resp => resp.json())
         .then(klasses => {
             // console.log(klasses)
-            // normally in react this.setState{ classes }
-            // but now we don't want our component to handle state
             dispatch(fetchedKlasses(klasses))
         } )
-    
 
     }
      
 }
+
+// function handleUsername(e){
+//     return {type: "USERNAME", payload: e.target.value }
+// }
 
 export {fetchingKlasses}
 

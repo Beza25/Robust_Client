@@ -14,17 +14,8 @@ export default class NavBar extends Component {
 
                     <Link to= "/login" className="item"> Login </Link>
                     <Link to= "/homepage" className="item"> Home Page </Link>
-                    <Link to= "/mainpage" className="item"> MainPage</Link>
-                   
-                    {/* <a className="item">
-                        Jobs
-                    </a>
-                    <a className="item">
-                        Locations
-                    </a>
-                    <a className="item">
-                        Locations
-                    </a> */}
+                    {/* <Link to= "/mainpage" className="item"> MainPage</Link> */}
+                  
                 </div>
                                     
             </div>

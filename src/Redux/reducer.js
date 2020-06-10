@@ -2,9 +2,11 @@
 
 import { combineReducers } from "redux";
 
+
 let intialState = {
     klasses: [],
-    currentUser: null
+    currentUser: null,
+    userName: ""
 }
 
 
@@ -18,9 +20,33 @@ const klassesReducer = (oldState = intialState.klasses, action) => {
             return oldState
     }
 }
+const userReducer = (oldState = intialState.currentUser, action) =>{
+
+    // "CURENTUSER" return action.payload
+    return oldState
+
+
+}
+
+const userNameReducer = (oldState = intialState.userName, action) =>{
+
+    // "CURENTUSER" return action.payload
+    switch(action.type){
+        case "USERNAME":
+         return {username: action.payload}
+        default:
+            return oldState
+    }
+}
+
+
+
 // make your reducer to return an object by using combinned reducer 
 const rootReducer = combineReducers({
-    klasses: klassesReducer
+    klasses: klassesReducer,
+    currentUser: userReducer,
+    userName: userNameReducer
+   
    
 })
 
