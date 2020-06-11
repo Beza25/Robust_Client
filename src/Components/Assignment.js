@@ -4,24 +4,18 @@ class Assignment extends Component {
   
     render() {
         return (
-            <div>
-                  <div className="item">
-                                {/* <i className="large github middle aligned icon"></i> */}
-                                <div className="content">
-                                <a className="header">{this.props.assign.title}  {this.props.assign.deadline}
-
-                                <button className="ui blue button" onClick= {() => this.props.handleEdit(this.props.assign)}> EDIT</button>
-                                <button className="ui red button" onClick= {() => this.props.handleDelete(this.props.assign.id)}> DELET</button>
-                                
-                                </a>
-                                {/* <div className="description">Updated 10 mins ago</div> */}
-                                </div>
-                                <br/>
-                 </div>
-                
-            </div>
+            <div className="assign" onClick={() => this.props.getAssign(this.props.assign)}>
+                <div id="assign-content">
+                {this.props.assign.title}  {this.props.assign.deadline}
+                </div>
+                <i id="assign-icon" className="edit blue icon"  onClick= {() => this.props.handleEdit(this.props.assign)}></i>
+                <i id="assign-icon"  className="trash red alternate outline icon" onClick= {() => this.props.handleDelete(this.props.assign.id)}></i>
+  
+    </div>
         )
     }
 }
 
 export default Assignment
+
+

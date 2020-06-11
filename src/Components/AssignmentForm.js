@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {Link} from "react-router-dom"
+import swal from 'sweetalert';
 
 export default class AssignmentFrom extends Component {
     constructor(){
@@ -48,6 +50,8 @@ getMonthFromString = (mon) => {
             body: JSON.stringify(assign)
         }).then(resp => resp.json())
         .then(newAssign =>  this.props.createAssign(newAssign))
+       
+        
       this.props.displayAssigns()
     }
 
@@ -57,7 +61,7 @@ getMonthFromString = (mon) => {
                 <form className="ui form" onSubmit = {this.SubmitAssign}>
                     <div className="field">
                         <label>Title</label>
-                        <input type="text"  placeholder="First Name"
+                        <input type="text"  placeholder="title"
                          name= "title"
                          value = {this.state.title}
                           onChange={this.handleChange}
@@ -77,7 +81,7 @@ getMonthFromString = (mon) => {
 
                     <div className="field">
                         <label>Assignemt</label>
-                        <textarea type="text"  placeholder="Last Name"
+                        <textarea type="text"  placeholder="content"
                         onChange= {this.handleChange}
                         value = {this.state.assign}
                         name = "assign"
@@ -87,7 +91,12 @@ getMonthFromString = (mon) => {
                         
                     </div>
                     <button className="ui button" type="submit">Submit</button>
+                
+                    
+                            
                     </form>
+                    <br/>
+                    {/* <button className="ui olive button" onClick = {this.props.handleBack} >Back</button> */}
                                     
             </div>
         )

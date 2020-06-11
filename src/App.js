@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-// , Redirect
+// import swal from '@sweetalert/with-react';
+import swal from 'sweetalert';
+
 import './App.css';
 import  NavBar from './Containers/NavBar'
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import HomePage from './Containers/HomePage';
 import LoginForm from './Containers/LoginForm';
 import MainPage from './Containers/MainPage';
@@ -18,6 +19,7 @@ class App extends Component {
     super()
     this.state ={
       userAssignments: [],
+      userKlasses: [],
       currentUser : {
         id: 2,
         first_name: "Carla", 
@@ -33,30 +35,30 @@ class App extends Component {
 
   componentDidMount(){ 
     this.props.fetchingKlasses()
+   
+    // console.log("current User: ",this.props.currentUser)
     const currentUser = this.state.currentUser 
-    
+    let url = `http://localhost:3001/${currentUser.user}s/${currentUser.id}`
 
-    if(currentUser.user === "teacher"){
-      fetch(`http://localhost:3001/teachers/${currentUser.id}`)
+    fetch(url)
     .then(resp => resp.json())
     .then(data => {
-      // console.log("teacher data: ", data)
-      this.setState({userAssignments: data.assignments})
+      this.setState({userAssignments: data.assignments })
+      this.setState({userKlasses: data.klasses})
+    
     })
-  
-    }else{
-      fetch(`http://localhost:3001/students/${currentUser.id}`)
-      .then(resp => resp.json())
-      .then(data => {
-        // console.log("student data: ", data)
-        this.setState({userAssignments: data.assignments})
-        
-      })
-    }
+   
 }
 
 createAssign =(newAssign) => {
-  console.log("New Assing: ", newAssign)
+  // console.log("New Assing: ", newAssign)
+  
+  swal({
+    title: "Created Successfully!",
+    text: "You clicked the button!",
+    icon: "success",
+    button: "Continue!",
+  });
  
   let  arr=  [...this.state.userAssignments, newAssign]
  
@@ -64,6 +66,13 @@ createAssign =(newAssign) => {
 }
 
 editAssigns = ( updatedAssign) => {
+  swal({
+    title: "Edited Successfully!",
+    text: "You clicked the button!",
+    icon: "success",
+    button: "Continue!",
+  });
+
   let assignments = this.state.userAssignments 
  assignments.forEach(a => { if (a.id === updatedAssign.id){
                                 a.title = updatedAssign.title
@@ -77,6 +86,12 @@ editAssigns = ( updatedAssign) => {
 }
 
 handleDelete= (id) => {
+  swal({
+    title: "Deleted Successfully!",
+    text: "You clicked the button!",
+    icon: "success",
+    button: "Continue!",
+  });
   fetch(`http://localhost:3001/assignments/${id}`,{ method: "DELETE" })
  const filtered =  this.state.userAssignments.filter(a => a.id !== id)
   this.setState({userAssignments: filtered})
@@ -84,6 +99,8 @@ handleDelete= (id) => {
 }
 
 render(){
+  // console.log("userKlasses: ", this.state.userKlasses)
+
   return (
     
     <div className="App">
@@ -95,23 +112,29 @@ render(){
         
           <Route exact path = "/login" render= {() => (<LoginForm/>)}/>
           
-          <Route exact path = "/homepage" render= {() => (<HomePage/>)}/>
-          {/* <Route path = "/mainpage" render= {() => (<MainPage />)}/> */}
+          {this.state.currentUser ?
+          <Route exact path = "/homepage" render= {() => (<HomePage/>)}/>:
+          <Redirect to="/"/> }
+    
+          {this.state.currentUser ?
           <Route exact path = "/classes/:id" render= {(props) => 
             {
               let id = props.match.params.id
               let klass = this.props.klasses.find(k => k.id == id)
+              // let klass = this.state.userKlasses.find(k => k.id == id)
              
               return <MainPage klass = {klass} 
                             createAssign= {this.createAssign}
                              assignments={this.state.userAssignments}
                              editAssigns = {this.editAssigns}
                              handleDelete ={this.handleDelete}
+                             currentUser = {this.state.currentUser} 
                              
                              />
 
             }
            }/>
+       :<Redirect to="/"/> }
         
           <Route render= {() => <div > Page Not Found 404</div>}/>
           
@@ -134,7 +157,8 @@ const mapStateToProps = (state) => {
   // console.log("App's state: ", state.klasses)
   return{
     
-       klasses: state.klasses
+       klasses: state.klasses,
+       currentUser: state.currentUser
   }
 }
 
@@ -148,3 +172,27 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+  
+
+
+
+
+// if(currentUser.user === "teacher"){
+    //   fetch(`http://localhost:3001/teachers/${currentUser.id}`)
+    // .then(resp => resp.json())
+    // .then(data => {
+    //   // console.log("teacher data: ", data)
+      
+    //   this.setState({userAssignments: data.assignments})
+    // })
+  
+    // }else{
+    //   fetch(`http://localhost:3001/students/${currentUser.id}`)
+    //   .then(resp => resp.json())
+    //   .then(data => {
+    //     // console.log("student data: ", data)
+    //     this.setState({userAssignments: data.assignments})
+        
+      // })
+  //  } 

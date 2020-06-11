@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import Assignment from './Assignment'
 
 class Assignments extends Component {
+   
 
+  
 
    
   
@@ -13,19 +15,25 @@ class Assignments extends Component {
    
      
         return (
-            <div>
-              Assignemts
-                <div className="ui relaxed divided list">
+            <div>  
+                <h1 className= "assigns-header"> Assignments </h1>
+
+                
+                
+                <button id="create-assign" className="ui green button" onClick= {this.props.handleClick}>Create Assignment</button>
+                <br/>
+             
                     {    filtered.map(a =>  
                        
                         <Assignment key={a.id} assign={a} 
                             handleEdit={this.props.handleEdit}
                             handleDelete= {this.props.handleDelete}
+                            getAssign ={ this.props.getAssign}
                             />
                          
                     ) }
                 
-                </div>
+                
 
 
                 

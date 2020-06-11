@@ -17,10 +17,15 @@ function fetchedKlasses(klasses){
 function fetchingKlasses(){
     return (dispatch) => {
         fetch(url)
+        
         .then(resp => resp.json())
         .then(klasses => {
             // console.log(klasses)
             dispatch(fetchedKlasses(klasses))
+            // fetch(`"http://localhost:3001/${currentUser.user}s/${currentUser.id}`)
+            // .then(data => {
+            //     // console.log(klasses)
+            //     dispatch(fetchedKlasses(data.klasses))
         } )
 
     }

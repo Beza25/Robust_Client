@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {Link} from "react-router-dom"
+import swal from 'sweetalert';
 
 class EditAssignment extends Component {
     constructor(props){
@@ -43,15 +45,16 @@ editAssign = (e)=> {
     }).then(resp => resp.json())
     .then(updatedAssign =>{
         // console.log(updatedAssign)
+       
         this.props.editAssigns(updatedAssign)
-        alert("Successfuly Updaed!")
+       
         this.props.displayAssigns()
         
     } )
 }
 
     render() {
-        console.log("edit assing:", this.props)
+        // console.log("edit assing:", this.props)
         return (
             <div>
                 <h1> Edit Form {this.props.assign.id}</h1>
@@ -91,6 +94,9 @@ editAssign = (e)=> {
                         
                     </div>
                     <button className="ui button" type="submit">Submit</button>
+                    {/* <Link to= {`/classes/${this.props.klass.id}`}> 
+                                <button className="ui olive button">Back</button>
+                            </Link> */}
                     </form>
                                 
             </div>

@@ -5,7 +5,16 @@ import { combineReducers } from "redux";
 
 let intialState = {
     klasses: [],
-    currentUser: null,
+    currentUser : {
+        id: 2,
+        first_name: "Carla", 
+        last_name: null,
+         username: "carla",
+          password_digest: null,
+           img: "https://ca.slack-edge.com/T02MD9XTF-UU5CVUP08-d274...",
+           user: "teacher",
+            created_at: "2020-06-09 03:01:25", updated_at: "2020-06-09 03:01:25"
+      },
     userName: ""
 }
 

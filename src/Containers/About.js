@@ -5,7 +5,7 @@ export default class About extends Component {
         return (
             <div>
                 <h1>
-                    About US
+                    About US Hiiiiiiiiiii
                 </h1>
                 <div className= "about-us">
                 <img className="ui fluid image" alt="hi" id= "about-us-img"src="https://www.imgacademy.com/sites/default/files/styles/scale_1700w/public/2020-04/OG-boarding-school.jpg"/>
