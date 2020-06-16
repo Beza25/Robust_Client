@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Assignment from './Assignment'
+import CreateAssign from './CreateAssing'
+
 
 class Assignments extends Component {
    
@@ -9,18 +11,24 @@ class Assignments extends Component {
    
   
     render() {
+        // console.log("Asssignments: ", this.props.klass)
+        // debugger 
       
         let {assignments, klass} = this.props
         const filtered = assignments.filter(a => a.klass_id === klass.id)
    
      
         return (
-            <div>  
+            <div id= "all-assigns">  
                 <h1 className= "assigns-header"> Assignments </h1>
 
                 
-                
-                <button id="create-assign" className="ui green button" onClick= {this.props.handleClick}>Create Assignment</button>
+                {this.props.currentUser.user === "teacher"?
+                // <button id="create-assign" className="ui green button" onClick= {this.props.handleClick}>Create Assignment</button>
+                <CreateAssign createAssign = {this.props.createAssign}
+                    klass={this.props.klass}
+                 />
+                :null}
                 <br/>
              
                     {    filtered.map(a =>  
@@ -29,6 +37,8 @@ class Assignments extends Component {
                             handleEdit={this.props.handleEdit}
                             handleDelete= {this.props.handleDelete}
                             getAssign ={ this.props.getAssign}
+                            currentUser = {this.props.currentUser}
+                            editAssigns = {this.props.editAssigns}
                             />
                          
                     ) }

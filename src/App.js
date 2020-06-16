@@ -7,10 +7,10 @@ import  NavBar from './Containers/NavBar'
 import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import HomePage from './Containers/HomePage';
 import LoginForm from './Containers/LoginForm';
-import MainPage from './Containers/MainPage';
 import About from './Containers/About';
 import {connect} from 'react-redux';
 import {fetchingKlasses} from './Redux/actions';
+import MainPage2 from "./Containers/MainPage2"
 // import ClassCard from './Components/ClassCard'
 
 class App extends Component {
@@ -20,16 +20,9 @@ class App extends Component {
     this.state ={
       userAssignments: [],
       userKlasses: [],
-      currentUser : {
-        id: 2,
-        first_name: "Carla", 
-        last_name: null,
-         username: "carla",
-          password_digest: null,
-           img: "https://ca.slack-edge.com/T02MD9XTF-UU5CVUP08-d274...",
-           user: "teacher",
-            created_at: "2020-06-09 03:01:25", updated_at: "2020-06-09 03:01:25"
-      }
+       currentUser : {id: 2, user: "teacher", first_name: "Carla", last_name: null, username: "carla",img: "https://ca.slack-edge.com/T02MD9XTF-UU5CVUP08-d274..."}
+      
+      // currentUser: {id: 4, user: "student", first_name: "Alex", last_name: null, username: "alex", level: 4, img: "https://ca.slack-edge.com/T02MD9XTF-UU5CW4UJU-58c5..."}
     }
   }
 
@@ -45,8 +38,13 @@ class App extends Component {
     .then(data => {
       this.setState({userAssignments: data.assignments })
       this.setState({userKlasses: data.klasses})
+      console.log("klasses: ", data.klasses)
+   
     
     })
+
+    // fetch(`http://localhost:3001/)
+   
    
 }
 
@@ -55,12 +53,12 @@ createAssign =(newAssign) => {
   
   swal({
     title: "Created Successfully!",
-    text: "You clicked the button!",
+   
     icon: "success",
     button: "Continue!",
   });
  
-  let  arr=  [...this.state.userAssignments, newAssign]
+  let  arr=  [newAssign, ...this.state.userAssignments]
  
   this.setState({userAssignments: arr }) 
 }
@@ -113,28 +111,52 @@ render(){
           <Route exact path = "/login" render= {() => (<LoginForm/>)}/>
           
           {this.state.currentUser ?
-          <Route exact path = "/homepage" render= {() => (<HomePage/>)}/>:
+          <Route exact path = "/classes" render= {() => (<HomePage   klasses={this.state.userKlasses}  />)}/>:
           <Redirect to="/"/> }
     
-          {this.state.currentUser ?
+          {this.state.currentUser  ?
           <Route exact path = "/classes/:id" render= {(props) => 
             {
               let id = props.match.params.id
-              let klass = this.props.klasses.find(k => k.id == id)
-              // let klass = this.state.userKlasses.find(k => k.id == id)
+              // let klass = this.props.klasses.find(k => k.id == i)      
+              let klasses = this.state.userKlasses
+          
+               let klass
+               {klasses.length > 0 ? 
+               klass = klasses.find(k => k.id == id)
+                : klass = null
+              }
              
-              return <MainPage klass = {klass} 
-                            createAssign= {this.createAssign}
-                             assignments={this.state.userAssignments}
-                             editAssigns = {this.editAssigns}
-                             handleDelete ={this.handleDelete}
-                             currentUser = {this.state.currentUser} 
+         
+              // debugger
+             //let klass = {id: 1, name: "Mirtle", level:2, teacher_id: 1}
+              // return <MainPage klass = {klass} 
+              //               createAssign= {this.createAssign}
+              //                assignments={this.state.userAssignments}
+              //                editAssigns = {this.editAssigns}
+              //                handleDelete ={this.handleDelete}
+              //                currentUser = {this.state.currentUser} 
                              
-                             />
+              //                />
+                             return klass? <MainPage2 klass = {klass} 
+                             createAssign= {this.createAssign}
+                              assignments={this.state.userAssignments}
+                              editAssigns = {this.editAssigns}
+                              handleDelete ={this.handleDelete}
+                              currentUser = {this.state.currentUser}  
+                              
+                              />: 
+                              <div class="ui blue active inverted dimmer">
+                                <div class="ui text loader">Loading</div>
+                              </div>
+                              // "here"
+                            
 
-            }
+              }
+         
            }/>
        :<Redirect to="/"/> }
+
         
           <Route render= {() => <div > Page Not Found 404</div>}/>
           

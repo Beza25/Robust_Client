@@ -19,7 +19,7 @@ import ClassCard from '../Components/ClassCard';
                 <h1> My Clasess</h1>
         
                 <div className= "ui link centered cards">
-                    {this.props.fetchedKlasses.map(k =>  
+                    {this.props.klasses.map(k =>  
                     <ClassCard key={k.id} klass = {k} /> )}         
                 </div> 
 

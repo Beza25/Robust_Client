@@ -6,22 +6,22 @@ import {Link} from "react-router-dom"
     render() {
         // console.log("Class Cad's props: ", this.props)
         // "https://clipartstation.com/wp-content/uploads/2018/10/textbooks-clipart-5.jpg"
+        let {klass} = this.props
         return (
-    
                 <div id="klass-card" className="card" >
                     
                         <div className="image">
-                            <img alt="recipe" src= {this.props.klass.img}/> 
+                            <img alt="recipe" src= {klass.img}/> 
                         </div>
                         <div className="content">
-                            <div className="header center-name">{this.props.klass.name}</div>
-                            <div className="description center-about"> GRADE: {this.props.klass.level}</div>
+                            <div className="header center-name">{klass.name}</div>
+                            <div className="description center-about"> GRADE: {klass.level}</div>
                             <br/>
-                            <Link to= {`/classes/${this.props.klass.id}`}> 
+                            <Link to= {`/classes/${klass.id}`}> 
                                 <button className="ui olive button">Detail</button>
                             </Link> 
                         </div>
-                
+                        
                   
                 </div>
         )

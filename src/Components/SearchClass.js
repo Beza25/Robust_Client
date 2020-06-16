@@ -4,6 +4,7 @@ export default class SearchClass extends Component {
     render() {
         return (
             <div>
+        
                 
             </div>
         )

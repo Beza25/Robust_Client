@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
-import AssignmentForm from "../Components/AssignmentForm"
+import AssignmentForm from "../Extra/AssignmentForm"
 import Assignments  from "../Components/Assignments"
-import EditAssignment from '../Components/EditAssignment'
+import EditAssignment from '../Extra/EditAssignment'
 import AssignDetail from '../Components/AssignDetail'
+import Grade from "../Components/Grade"
 
 export default class MiddleContainer extends Component {
     
     
     render() {
-        console.log("Middle Container props ", this.props.showDetail)
+        console.log("Show Assigns ", this.props.showAssigns)
+        console.log("Show Grade ", this.props.showGrade)
         return (
             <div id="right-side">
               
@@ -16,18 +18,19 @@ export default class MiddleContainer extends Component {
 
                 <div id="list">
                 <h1>  {this.props.klass.name} </h1>
-                      {this.props.showAssigs === false ?
-                    <img id="klass-img" className="ui medium aligned circular image" src={this.props.klass.img}/>
+                      {!this.props.showAssigs && !this.props.showGrade?
+                    <img id="klass-img" className="ui medium aligned circular image" src={this.props.klass.img} alt="none"/>
                 : null
                 }
-                
-                {this.props.showAssigs && this.props.showForm=== false && this.props.editForm === false ?
+                {/*   */}
+                {  this.props.showAssigns && !this.props.showForm && !this.props.editForm && !this.props.showDetail && !this.props.showGrade ?
                                 <Assignments klass ={this.props.klass }
                                 assignments ={this.props.assignments} 
                                 handleEdit = {this.props.handleEdit}
                                 handleDelete = {this.props.handleDelete}
                                 handleClick = {this.props.handleClick}
                                 getAssign = {this.props.getAssign}
+                                currentUser = {this.props.currentUser}
                                 
                                 
                         />   : this.props.editForm? <EditAssignment 
@@ -41,6 +44,7 @@ export default class MiddleContainer extends Component {
                                                         // handleBack = { this.props.handleBack}
                                                         />
                         :this.props.showDetail ? <AssignDetail  detailAssign={this.props.detailAssign}/>
+                        :this.props.showGrade ? <Grade />
                         :null
                     }
 
