@@ -6,8 +6,9 @@ class Assignment extends Component {
     render() {
         return (
             // onClick={() => this.props.getAssign(this.props.assign)}
-            <div className="assign"  onClick={() => this.props.getAssign(this.props.assign)}>
-                <div id="assign-content">
+            
+            <div className="assign" >
+                <div id="assign-content"  onClick={() => this.props.getAssign(this.props.assign)}>
                 {this.props.assign.title}  {this.props.assign.deadline}
                 </div>
                 {this.props.currentUser.user === "teacher" ?

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 
 // import EditAssignment from '../Components/EditAssignment'
-import Grade from '../Components/Grade'
+import GradeContainer from '../Components/GradeContainer'
 import Syllabus from '../Components/Syllabus'
 import ShowAssignments from '../Components/ShowAssingments'
 
 export default class MainPage2 extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state= {
+            grades: this.props.klass.student_assignments,
             currentSection: "MyAssignments",
             showDetail: false,
             detailAssign: null
@@ -22,7 +23,7 @@ export default class MainPage2 extends Component {
     }
     setCurrentSection =(section) =>{
        
-        this.setState({currentSection: section, showDetail:false})
+        this.setState({currentSection: section})
     }
     handleBack=() =>{
         console.log("Attempt to go back")
@@ -31,7 +32,8 @@ export default class MainPage2 extends Component {
     }
 
     render() {
-        console.log("Main page klas: ", this.props.klass)
+        // console.log("Main page klas: ", this.props.assignments)
+        
         return (
             <div id="tab">
 
@@ -65,7 +67,8 @@ export default class MainPage2 extends Component {
 
                     
                     /> : this.state.currentSection === 'MyGrades'? 
-                    <Grade  clickGrade={this.clickGrade}/>: this.state.currentSection === "Syllabus" ?
+                    <GradeContainer grades= {this.state.grades} klass={this.props.klass}  assignments={this.props.assignments} />
+                    : this.state.currentSection === "Syllabus" ?
                     <Syllabus/>:
                     null
                     // <img id="klass-img" className="ui medium aligned circular image" src={this.props.klass.img}/>

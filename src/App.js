@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import swal from '@sweetalert/with-react';
 import swal from 'sweetalert';
 
+
+
 import './App.css';
 import  NavBar from './Containers/NavBar'
 import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
@@ -20,33 +22,61 @@ class App extends Component {
     this.state ={
       userAssignments: [],
       userKlasses: [],
-       currentUser : {id: 2, user: "teacher", first_name: "Carla", last_name: null, username: "carla",img: "https://ca.slack-edge.com/T02MD9XTF-UU5CVUP08-d274..."}
+      grades: [],
+      currentUser:  null 
+
+      //  currentUser : {id: 2, user: "teacher", first_name: "Carla", last_name: null, username: "carla",img: "https://ca.slack-edge.com/T02MD9XTF-UU5CVUP08-d274..."}
       
       // currentUser: {id: 4, user: "student", first_name: "Alex", last_name: null, username: "alex", level: 4, img: "https://ca.slack-edge.com/T02MD9XTF-UU5CW4UJU-58c5..."}
     }
   }
 
-  componentDidMount(){ 
-    this.props.fetchingKlasses()
-   
-    // console.log("current User: ",this.props.currentUser)
-    const currentUser = this.state.currentUser 
-    let url = `http://localhost:3001/${currentUser.user}s/${currentUser.id}`
+  updateCurrentUser =(currentUser) =>{
+ 
+    this.setState({currentUser: currentUser,
+                    userKlasses: currentUser.klasses,
+                    userAssignments: currentUser.assignments
 
-    fetch(url)
-    .then(resp => resp.json())
-    .then(data => {
-      this.setState({userAssignments: data.assignments })
-      this.setState({userKlasses: data.klasses})
-      console.log("klasses: ", data.klasses)
+                
+    })
+  
+    console.log("current user " , this.state.currentUser)
+    console.log("current user " , this.state.userAssignments)
+
+
+
+  }
+
+  // componentDidMount(){ 
+  //   // this.props.fetchingKlasses()
+  //  if (this.state.currentUser){
+  //     // console.log("current User: ",this.props.currentUser)
+  //   const currentUser = this.state.currentUser 
+  //   let url = `http://localhost:3001/${currentUser.user}s/${currentUser.id}`
+
+  //   fetch(url)
+  //   .then(resp => resp.json())
+  //   .then(data => {
+  //     console.log( "fetched data", data)
+  //     this.setState({userAssignments: data.assignments })
+  //     this.setState({userKlasses: data.klasses} )
+      
+
+  //     this.setState({grades: data.klasses.student_assignments})
+     
+       
+  //     // console.log("data: ", data.klasses)
    
     
-    })
+  //   })
+
+  //  }
+   
 
     // fetch(`http://localhost:3001/)
    
    
-}
+// }
 
 createAssign =(newAssign) => {
   // console.log("New Assing: ", newAssign)
@@ -108,7 +138,7 @@ render(){
 
         <Route exact path = "/" component = {About}/>
         
-          <Route exact path = "/login" render= {() => (<LoginForm/>)}/>
+          <Route exact path = "/login" render= {() => (<LoginForm updateCurrentUser= {this.updateCurrentUser}/>)}/>
           
           {this.state.currentUser ?
           <Route exact path = "/classes" render= {() => (<HomePage   klasses={this.state.userKlasses}  />)}/>:
@@ -146,8 +176,8 @@ render(){
                               currentUser = {this.state.currentUser}  
                               
                               />: 
-                              <div class="ui blue active inverted dimmer">
-                                <div class="ui text loader">Loading</div>
+                              <div className="ui blue active inverted dimmer">
+                                <div className="ui text loader">Loading</div>
                               </div>
                               // "here"
                             

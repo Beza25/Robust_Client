@@ -187,7 +187,33 @@ box-shadow: 22px 26px 24px 0px rgba(0,0,0,0.75);
 	overflow-y: scroll;
 
 }
+/* --------Grade Container ---------*/
 
+#dropdown{
+	margin-left: 50 px;
+	padding-right: 500px;
+	background-color: red;
+}
+/* --------Student Table ---------*/
+.student-table-container{
+	display: flex;
+	background-color: red;
+	
+	justify-content: center;
+	
+
+}
+.student-table-column{
+
+	display: flex;
+	width: 33.3%;
+	flex-direction: column;
+	background-color: green;
+	
+	border: solid black;
+		
+	
+}
 /* --------Main Page---------*/
 body{
 	margin:0;

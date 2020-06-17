@@ -66,43 +66,37 @@ editAssign = (e)=> {
         // <i id="assign-icon" className="edit blue icon" ></i>
 
         return (
-            <Modal size="large" trigger={ <Button className="ui blue button" >Edit Assignment +</Button>}>
+            <Modal size="large" trigger={ <i id="assign-icon" className="edit blue icon" ></i>}>
                 <Modal.Header>Edit Assignment</Modal.Header>
                     <Modal.Content >
         
                     <form className="ui form" onSubmit = {this.editAssign}>
-                    <div className="field">
-                        <label>Title</label>
-                        <input type="text"  placeholder="Title"
-                        name= "title"
-                        value = {this.state.title}
-                        onChange={this.handleTitle}
-                        />
-                    </div>
-                    <div className="field">
-                        <label>Due Date:</label>
-                        <DatePicker 
-                        selected={this.state.startDate}
-                        onChange={(date ) => this.handleDate(date)}
-            
-                        minDate={new Date()}    
-                    />
-                </div>
-
-
-
-                    <div className="field">
-                        <label>Assignemt</label>
-                        <textarea type="text"  placeholder="Content"
-                        onChange= {this.handleContent}
-                        value = {this.state.content}
-                        name = "content"
-                        ></textarea>
-                    </div>
-                    <div className="field">
-                        
-                    </div>
+                        <div className="field">
+                            <label>Title</label>
+                            <input type="text"  placeholder="Title"
+                            name= "title"
+                            value = {this.state.title}
+                            onChange={this.handleTitle}
+                            />
+                        </div>
+                        <div className="field">
+                            <label>Due Date:</label>
+                            <DatePicker 
+                            selected={this.state.startDate}
+                            onChange={(date ) => this.handleDate(date)}
                 
+                            minDate={new Date()}    
+                             />
+                        </div>
+
+                        <div className="field">
+                            <label>Assignemt</label>
+                            <textarea type="text"  placeholder="Content"
+                            onChange= {this.handleContent}
+                            value = {this.state.content}
+                            name = "content"
+                            ></textarea>
+                        </div>
                             <button className="ui button" type="submit">Submit</button>
                         </form>
                    </Modal.Content>
