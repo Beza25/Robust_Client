@@ -13,8 +13,8 @@ import StudentTable from './StudentTable'
         return (
             <div>
                 Grade
-                <Sort  klass={this.props.klass}  assignments= {filtered} />
-                <Search />
+                {/* <Sort  klass={this.props.klass}  assignments= {filtered} />
+                <Search /> */}
 
             <br/>
                 <button className="fluid ui blue basic button">Student Table or Assign Table</button>
@@ -22,11 +22,11 @@ import StudentTable from './StudentTable'
 
                 {/* <AssignTable/> */}
                 <br/>
-                 <StudentTable  assignments = {filtered} 
+                 {/* <StudentTable  assignments = {filtered} 
                                 grades = {this.props.grades}
                                 klass = {this.props.klass}
                                 />
-               
+                */}
 
               
                                     

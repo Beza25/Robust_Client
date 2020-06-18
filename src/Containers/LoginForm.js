@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import {connect} from 'react-redux'
 import {Link} from "react-router-dom"
+import swal from 'sweetalert';
 
 
 
@@ -15,7 +16,7 @@ import {Link} from "react-router-dom"
      constructor(){
          super()
          this.state= {
-             username: "",
+             username: "carla",
              password : ""
          }
      }
@@ -26,17 +27,24 @@ import {Link} from "react-router-dom"
      }
 
      handleSubmit =( ) => {
-          console.log("Attempt to log in :", this.state.username)
-
+         
          fetch("http://localhost:3001/login" , {
             method: "POST",
             headers: {"Content-Type": "application/json" },
             body: JSON.stringify( this.state)
-         }).then(resp => resp.json())
-         .then(currentUser => this.props.updateCurrentUser(currentUser))
+         })
+         .then(resp => resp.json())
+         .then(currentUser => { 
+            console.log(currentUser)
+            if(currentUser.error_message){
+                swal(currentUser.error_message)
+            } else {
+                localStorage.setItem("token", currentUser.token)
+                this.props.updateCurrentUser(currentUser)
+            }
 
-     }
- 
+        })
+    }
 
     render() {
         // console.log("login prop: ", this.props)

@@ -6,24 +6,28 @@ import AssignDetail from './AssignDetail'
 export default class ShowAssignments extends Component {
     render() {
         // console.log("show assing: ", this.props.klass.id)
+
+        let {assignments,currentUser,klass, createAssign, 
+             handleDelete,
+             getAssign, editAssigns, showDetail, handleBack, detailAssign} = this.props
         return (
             <div>
-    
-               
-                {this.props.showDetail? 
+                {showDetail? 
 
-            <AssignDetail  detailAssign={this.props.detailAssign}   handleBack = {this.props.handleBack}/>
-            :  <Assignments  klass={this.props.klass}
-                    currentUser = {this.props.currentUser}
+            <AssignDetail  detailAssign={detailAssign}   handleBack = {handleBack}/>
+            :  <Assignments  klass={klass}
+                    currentUser = {currentUser}
                     // create props
-                    createAssign={this.props.createAssign} 
-                    assignments={this.props.assignments}
+                    createAssign={createAssign} 
+                    assignments={assignments}
                     //  edit props  
-                    editAssigns = {this.props.editAssigns}
+                    editAssigns = {editAssigns}
                     // delete props
-                    handleDelete = {this.props.handleDelete}
+                    handleDelete = {handleDelete}
                     // show assign props
-                    getAssign = {this.props.getAssign}
+                    getAssign = {getAssign}
+                   
+                    
             />
                 }
           

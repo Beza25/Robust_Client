@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 // import swal from '@sweetalert/with-react';
 import swal from 'sweetalert';
-
-
-
 import './App.css';
 import  NavBar from './Containers/NavBar'
 import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
@@ -27,56 +24,43 @@ class App extends Component {
 
       //  currentUser : {id: 2, user: "teacher", first_name: "Carla", last_name: null, username: "carla",img: "https://ca.slack-edge.com/T02MD9XTF-UU5CVUP08-d274..."}
       
-      // currentUser: {id: 4, user: "student", first_name: "Alex", last_name: null, username: "alex", level: 4, img: "https://ca.slack-edge.com/T02MD9XTF-UU5CW4UJU-58c5..."}
+    //   // currentUser: {id: 4, user: "student", first_name: "Alex", last_name: null, username: "alex", level: 4, img: "https://ca.slack-edge.com/T02MD9XTF-UU5CW4UJU-58c5..."}
     }
   }
 
-  updateCurrentUser =(currentUser) =>{
- 
-    this.setState({currentUser: currentUser,
-                    userKlasses: currentUser.klasses,
-                    userAssignments: currentUser.assignments
 
-                
-    })
-  
-    console.log("current user " , this.state.currentUser)
-    console.log("current user " , this.state.userAssignments)
-
-
-
+  componentDidMount(){
+       // check if there is a current user in localStorage
+       if(localStorage.getItem("token")){
+        console.log("token found")
+        fetch("http://localhost:3001/decode_token", {
+          headers: {"Authenticate": localStorage.token}
+        })
+        .then(resp => resp.json())
+        .then(data => {
+          console.log("data: ", data)
+          
+          this.updateCurrentUser(data)
+        })
+      } else{
+        console.log("no token found")
+      }
   }
 
-  // componentDidMount(){ 
-  //   // this.props.fetchingKlasses()
-  //  if (this.state.currentUser){
-  //     // console.log("current User: ",this.props.currentUser)
-  //   const currentUser = this.state.currentUser 
-  //   let url = `http://localhost:3001/${currentUser.user}s/${currentUser.id}`
 
-  //   fetch(url)
-  //   .then(resp => resp.json())
-  //   .then(data => {
-  //     console.log( "fetched data", data)
-  //     this.setState({userAssignments: data.assignments })
-  //     this.setState({userKlasses: data.klasses} )
-      
+  updateCurrentUser =(currentUser) =>{
 
-  //     this.setState({grades: data.klasses.student_assignments})
-     
-       
-  //     // console.log("data: ", data.klasses)
-   
-    
-  //   })
+    if(currentUser != null )  {
+      this.setState({currentUser: currentUser.user_data,
+                    userKlasses: currentUser.klasses,
+                    userAssignments: currentUser.assignments       
+    })
+    } else {
+      this.setState({currentUser: null})
+    } 
+  }
 
-  //  }
-   
-
-    // fetch(`http://localhost:3001/)
-   
-   
-// }
+  
 
 createAssign =(newAssign) => {
   // console.log("New Assing: ", newAssign)
@@ -125,24 +109,36 @@ handleDelete= (id) => {
   this.setState({userAssignments: filtered})
   
 }
+ //----- Logout ------//
+ handleLogout = () => {
+  // console.log("")
+  localStorage.removeItem("token")
+  this.updateCurrentUser(null)
+}
 
 render(){
-  // console.log("userKlasses: ", this.state.userKlasses)
+  console.log("userKlasses: ", this.state.userKlasses)
 
   return (
     
     <div className="App">
       <BrowserRouter>
-        <NavBar/>
+        <NavBar currentUser = {this.state.currentUser} handleLogout={this.handleLogout}/>
         <Switch>
 
         <Route exact path = "/" component = {About}/>
+{/*         
+          <Route exact path = "/login" render= {() => (<LoginForm updateCurrentUser= {this.updateCurrentUser}/>)}/> */}
+           <Route exact path="/logout" component = {About}/>
+          <Route exact path="/login" render={() => (
+              this.state.currentUser === null ? <LoginForm updateCurrentUser={this.updateCurrentUser} /> 
+              : <Redirect to="/classes"/>
+            )}/>
+
+
+          {this.state.currentUser? <Route exact path = "/classes" render= {() => 
+                                  (<HomePage   klasses={this.state.userKlasses}  />)} /> :<Redirect to="/login"/> }
         
-          <Route exact path = "/login" render= {() => (<LoginForm updateCurrentUser= {this.updateCurrentUser}/>)}/>
-          
-          {this.state.currentUser ?
-          <Route exact path = "/classes" render= {() => (<HomePage   klasses={this.state.userKlasses}  />)}/>:
-          <Redirect to="/"/> }
     
           {this.state.currentUser  ?
           <Route exact path = "/classes/:id" render= {(props) => 
@@ -155,19 +151,7 @@ render(){
                {klasses.length > 0 ? 
                klass = klasses.find(k => k.id == id)
                 : klass = null
-              }
-             
-         
-              // debugger
-             //let klass = {id: 1, name: "Mirtle", level:2, teacher_id: 1}
-              // return <MainPage klass = {klass} 
-              //               createAssign= {this.createAssign}
-              //                assignments={this.state.userAssignments}
-              //                editAssigns = {this.editAssigns}
-              //                handleDelete ={this.handleDelete}
-              //                currentUser = {this.state.currentUser} 
-                             
-              //                />
+               }
                              return klass? <MainPage2 klass = {klass} 
                              createAssign= {this.createAssign}
                               assignments={this.state.userAssignments}
@@ -179,9 +163,7 @@ render(){
                               <div className="ui blue active inverted dimmer">
                                 <div className="ui text loader">Loading</div>
                               </div>
-                              // "here"
-                            
-
+  
               }
          
            }/>
@@ -248,3 +230,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
         
       // })
   //  } 
+
+
+     // debugger
+             //let klass = {id: 1, name: "Mirtle", level:2, teacher_id: 1}
+              // return <MainPage klass = {klass} 
+              //               createAssign= {this.createAssign}
+              //                assignments={this.state.userAssignments}
+              //                editAssigns = {this.editAssigns}
+              //                handleDelete ={this.handleDelete}
+              //                currentUser = {this.state.currentUser} 
+                             
+              //                />

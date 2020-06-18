@@ -1,0 +1,135 @@
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
+
+/* *{ box-sizing: border-box; margin: 0; padding: 0; } */
+
+#body-c{ background-color: #434A54; }
+
+.middle{
+	width: 900px;
+	margin: 0 auto;
+}
+
+.page{
+	float: left;
+	width: 100%;
+}
+
+ul.main{
+	list-style: none;
+	float: left;
+	width: 280px;
+    margin: 20px 0 0 0;
+}
+#this-li{
+		float: left;
+        width: 100%;
+}
+#this-li:nth-child(1) a{
+            border-color: #48CFAD;
+        }
+#this-li:before{
+				background-color: #48CFAD;
+			}
+			#this-li:after{
+				background-color: #28ab8b;
+			}
+		
+			#this-li:nth-child(2) a{
+            border-color: #AC92EC;
+            }
+			#this-li:before{
+				background-color: #AC92EC;
+			}
+			#this-li:after{
+				background-color: #8669cd;
+			}
+		
+			#this-li:nth-child(3) a{
+            border-color: #4FC1E9;
+            }
+			#this-li:before{
+				background-color: #4FC1E9;
+			}
+			#this-li:after{
+				background-color: #2496c1;
+			}
+	
+			#this-li:nth-child(4) a{
+            border-color: #ED5565;
+            }
+			#this-li:before{
+				background-color: #ED5565;
+			}
+			#this-li:after{
+				background-color: #ca3342;
+			}
+		
+#this-a{
+			float: left;
+			width: 100%;
+			height: 50px;
+			line-height: 50px;
+			margin: 0 0 5px 0;
+			padding: 0 10px;
+			/* background-color: #fff; */
+			border-bottom: 4px solid;
+			color: #333;
+			font-family: 'Indie Flower', cursive;
+			font-size: 22px;
+			text-decoration: none;
+			text-indent: 0;
+			position: relative;
+            transition: 0.5s;
+        }
+#this-span{
+	color: black;
+				position: relative;
+				z-index: 1;
+			}
+			#this-span:before{
+				content: '';
+				width: 100%;
+				height: 0%;
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				transition: 0.2s;
+			}
+			#this-span:after{
+				content: '';
+				width: 0;
+				height: 4px;
+				position: absolute;
+				left: 50%;
+				bottom: -4px;
+				transition: 0.4s;
+			}
+			#this-span:hover{
+				color: #fff;
+				text-indent: 8px;
+			}
+			#this-span:hover:before{
+				height: 100%;
+			}
+			#this-span:hover:after{
+				width: 100%;
+				left: 0;
+			}
+	
+
+.right{
+	float: left;
+	width: 600px;
+	height: 100vh;
+	margin: 0 0 0 20px;
+	padding: 20px 20px 0 20px;
+	background-color: #EC87C0;
+	border-left: 4px solid #D770AD;
+    border-right: 4px solid #D770AD;
+}
+	h1{
+		margin: -10px 0 0 0;
+		color: #fff;
+		font-family: 'Indie Flower', cursive;
+		font-size: 42px;
+	}

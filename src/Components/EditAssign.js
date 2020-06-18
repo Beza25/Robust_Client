@@ -58,8 +58,6 @@ editAssign = (e)=> {
        
         this.props.editAssigns(updatedAssign)
        
-        // this.props.displayAssigns()
-        
     } )
 }
     render() {
